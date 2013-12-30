@@ -2,7 +2,7 @@
 <p id ="notice"><%=notice %> </p>
 <% end %>
 <!--<div class="store">-->
-  <h1><%= t('.title_html')%> </h1>
+  <h1><%= page_title %> </h1>
 
   <% cache ['store', Product.latest] do %>  
     <% @products.each do |product| %>
