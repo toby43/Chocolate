@@ -1,6 +1,11 @@
 class StoreController < ApplicationController
   skip_before_action :authorize
 
+  def main
+    params[:is_cover] = true
+    render 'main.html.erb'
+  end
+
   include CurrentCart
   before_action :set_cart 
   def index

@@ -6,6 +6,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+<% if !params[:is_cover] %>
 <body class="<%= controller.controller_name %>">
   <div id ="banner">
     <%= form_tag store_path, class: 'locale' do %>
@@ -42,6 +43,7 @@
         <%= button_to 'Logout', logout_path, method: :delete %>
       <% end %>
     </div>
+<% end %>
     <div id="main">
       <%=yield %>
     </div>

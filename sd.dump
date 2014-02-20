@@ -1,0 +1,463 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: carts; Type: TABLE; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE TABLE carts (
+    id integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.carts OWNER TO alex;
+
+--
+-- Name: carts_id_seq; Type: SEQUENCE; Schema: public; Owner: alex
+--
+
+CREATE SEQUENCE carts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carts_id_seq OWNER TO alex;
+
+--
+-- Name: carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alex
+--
+
+ALTER SEQUENCE carts_id_seq OWNED BY carts.id;
+
+
+--
+-- Name: line_items; Type: TABLE; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE TABLE line_items (
+    id integer NOT NULL,
+    product_id integer,
+    cart_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    quantity integer DEFAULT 1,
+    order_id integer
+);
+
+
+ALTER TABLE public.line_items OWNER TO alex;
+
+--
+-- Name: line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: alex
+--
+
+CREATE SEQUENCE line_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.line_items_id_seq OWNER TO alex;
+
+--
+-- Name: line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alex
+--
+
+ALTER SEQUENCE line_items_id_seq OWNED BY line_items.id;
+
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE TABLE orders (
+    id integer NOT NULL,
+    name character varying(255),
+    address text,
+    email character varying(255),
+    pay_type character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.orders OWNER TO alex;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: alex
+--
+
+CREATE SEQUENCE orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.orders_id_seq OWNER TO alex;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alex
+--
+
+ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
+
+
+--
+-- Name: products; Type: TABLE; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE TABLE products (
+    id integer NOT NULL,
+    title character varying(255),
+    description text,
+    image_url character varying(255),
+    price numeric(8,2),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.products OWNER TO alex;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: alex
+--
+
+CREATE SEQUENCE products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_id_seq OWNER TO alex;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alex
+--
+
+ALTER SEQUENCE products_id_seq OWNED BY products.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO alex;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    name character varying(255),
+    password_digest character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.users OWNER TO alex;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: alex
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO alex;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alex
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alex
+--
+
+ALTER TABLE ONLY carts ALTER COLUMN id SET DEFAULT nextval('carts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alex
+--
+
+ALTER TABLE ONLY line_items ALTER COLUMN id SET DEFAULT nextval('line_items_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alex
+--
+
+ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alex
+--
+
+ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alex
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: carts; Type: TABLE DATA; Schema: public; Owner: alex
+--
+
+COPY carts (id, created_at, updated_at) FROM stdin;
+2	2013-12-23 21:07:39.042378	2013-12-23 21:07:39.042378
+3	2013-12-30 20:28:17.990345	2013-12-30 20:28:17.990345
+4	2014-02-20 17:04:30.443704	2014-02-20 17:04:30.443704
+\.
+
+
+--
+-- Name: carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alex
+--
+
+SELECT pg_catalog.setval('carts_id_seq', 4, true);
+
+
+--
+-- Data for Name: line_items; Type: TABLE DATA; Schema: public; Owner: alex
+--
+
+COPY line_items (id, product_id, cart_id, created_at, updated_at, quantity, order_id) FROM stdin;
+2	7	2	2013-12-23 21:18:31.203219	2013-12-23 21:18:33.847559	2	\N
+\.
+
+
+--
+-- Name: line_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alex
+--
+
+SELECT pg_catalog.setval('line_items_id_seq', 2, true);
+
+
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: alex
+--
+
+COPY orders (id, name, address, email, pay_type, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alex
+--
+
+SELECT pg_catalog.setval('orders_id_seq', 1, false);
+
+
+--
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: alex
+--
+
+COPY products (id, title, description, image_url, price, created_at, updated_at) FROM stdin;
+1	Chocolate Truffle	Fine chocolate truffle made from 70% cacao that's imported from around the world.	lindt.jpg	89.77	2013-12-19 19:00:39.365737	2013-12-19 19:00:39.365737
+2	Chocolate Heart	Melted chocolate heart at the center of a Belgian chocolate truffle.	heart.png	56.78	2013-12-19 19:01:49.46924	2013-12-19 19:01:49.46924
+3	Truffles	A wide selection of truffles made from a variety of chocolates and fruits.	truffles.jpg	34.55	2013-12-19 19:02:32.196616	2013-12-19 19:02:32.196616
+4	Strawberry	Covered in chocolate, and also filled with chocolate	strawberry.jpg	34.99	2013-12-19 19:28:00.047771	2013-12-19 19:28:00.047771
+5	Cupcakes	Scrumptious chocolate cupcakes are made from the finest flours and sugars to create a magnificent piece.	cupcakes.jpg	94.00	2013-12-19 19:28:59.747978	2013-12-19 19:28:59.747978
+6	Watch	The most coveted item of the year. Not only does it provide you with the correct time, but also with an afternoon snack - chocolate.	watch.jpg	45.75	2013-12-19 19:30:08.449649	2013-12-19 19:30:08.449649
+7	Chocolate Bar	Made only from the finest ingredients	bar.jpg	456.23	2013-12-19 19:30:40.537787	2013-12-19 19:30:40.537787
+\.
+
+
+--
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alex
+--
+
+SELECT pg_catalog.setval('products_id_seq', 7, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: alex
+--
+
+COPY schema_migrations (version) FROM stdin;
+20131213014901
+20131213202754
+20131213203423
+20131213221014
+20131213221939
+20131216175417
+20131216175544
+20131217011756
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: alex
+--
+
+COPY users (id, name, password_digest, created_at, updated_at) FROM stdin;
+2	bob	$2a$10$aahTXQf3t7dK0wDrjoM3xux00EmoJThtxZ2q.6in5uUkHy.noH3Vi	2013-12-20 00:22:53.278779	2013-12-20 00:22:53.278779
+3	bob2	$2a$10$7WHJfRVfmnpYydYagaUJ4ehWo8VL4ucWBF8ZU7pAe8UjmsLcUR3v.	2013-12-23 20:53:03.463462	2013-12-23 20:53:03.463462
+4	bob3	$2a$10$kqpHGYv3KCACixJUO1CzqeJBM9tntKgRTImuA.Robjt8FHD7H3s4K	2013-12-23 21:00:30.577898	2013-12-23 21:00:30.577898
+5	bob4	$2a$10$.maWFTdc7H5d/CzbVdJ5Y.bEBztVTXLhHQHB6T623tiezJ5RKiR/G	2013-12-23 21:08:16.93274	2013-12-23 21:08:16.93274
+6	bob5	$2a$10$IVRDemsLjfexqLKX/gQnje77GRpBouwPvzmXNycv8t6wqfZ7e79pO	2013-12-23 21:17:16.135863	2013-12-23 21:17:16.135863
+7	bob6	$2a$10$kANTVhi5zIF8MvA62VI9.ucp6GOi29f8K2/322MnEAFY/Y27ku1vK	2013-12-23 21:17:55.664156	2013-12-23 21:17:55.664156
+8	bob7	$2a$10$0.NFvOZ4dnTstGZuy4IqZeLwW0rKiu9AIlcpm3F9CBNRN5hgl5Pnu	2013-12-23 21:18:51.369857	2013-12-23 21:18:51.369857
+9	bob8	$2a$10$rtBX4Qm0qLjEFougsmGUfuM/J6Z0snxUikaYtEg6O6odU0uH5qN7K	2013-12-23 21:20:40.262079	2013-12-23 21:20:40.262079
+10	bob9	$2a$10$XA6nDKdB1SeM6SDSx0jRruSy4.PXFkBO1K6/E52Ta6hKvwlY44JEu	2013-12-23 21:21:37.060675	2013-12-23 21:21:37.060675
+12	bob11	$2a$10$0tGu4.DAOxKsZg7si3aT7.VWicfhZr4U1PVKba2ZsfXrJ4T6f3/dy	2013-12-23 21:23:25.710553	2013-12-23 21:23:25.710553
+11	bob10	$2a$10$q9KKBBjXgmEsBifRW34.xeEwuapIy6Xw5GwxK7zHF/j8Bx8zoA9si	2013-12-23 21:21:56.059622	2013-12-23 21:24:21.70533
+13	bob12	$2a$10$NR5MqqHXJysA4QjA3rzmNOwFSItoxcb/Q8FvVbeHpfpptbwdW9KJa	2013-12-23 21:26:08.733502	2013-12-23 21:26:08.733502
+1	alex	$2a$10$TJXeIA6MrWKSkrvxTLhPKeYFVQmZ6KsMLRd.oEPFFf2jwXkz8c8xy	2013-12-19 18:58:32.794059	2013-12-23 21:27:32.613617
+14	bob13	$2a$10$W/sXlfkzzAXrpAtZjFCJs.2gJtA3SZcRrcT7FLTUmjitKS/KSMCsm	2013-12-23 21:27:50.310603	2013-12-23 21:27:50.310603
+15	bob14	$2a$10$DF/X8K6isDI6/JfhgRbwVOa60Fu9TpXMi124mchFj.uiIqkxtZ6rK	2013-12-23 21:29:32.452498	2013-12-23 21:29:32.452498
+16	bob15	$2a$10$ZVknQAmlFulFC.11Ias0qOG7aA8HJVsm9Rz56.yxNd4vF7F9wbGxy	2013-12-23 21:30:42.144067	2013-12-23 21:30:42.144067
+17	bob16	$2a$10$qEwU0HJMT83YkZ2YF7m47OkV.btXfZQ0iMbhQud.GJcJpCa7m6wxO	2013-12-23 21:33:40.927861	2013-12-23 21:33:40.927861
+18	bob17	$2a$10$q7O.k.WsPOTOidQ/3Eg84eSePtL2.zZuZHHglJkM7ldRb7Whg5rmK	2013-12-23 21:34:57.469225	2013-12-23 21:34:57.469225
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alex
+--
+
+SELECT pg_catalog.setval('users_id_seq', 18, true);
+
+
+--
+-- Name: carts_pkey; Type: CONSTRAINT; Schema: public; Owner: alex; Tablespace: 
+--
+
+ALTER TABLE ONLY carts
+    ADD CONSTRAINT carts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: line_items_pkey; Type: CONSTRAINT; Schema: public; Owner: alex; Tablespace: 
+--
+
+ALTER TABLE ONLY line_items
+    ADD CONSTRAINT line_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: alex; Tablespace: 
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_pkey; Type: CONSTRAINT; Schema: public; Owner: alex; Tablespace: 
+--
+
+ALTER TABLE ONLY products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: alex; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_line_items_on_cart_id; Type: INDEX; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE INDEX index_line_items_on_cart_id ON line_items USING btree (cart_id);
+
+
+--
+-- Name: index_line_items_on_order_id; Type: INDEX; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE INDEX index_line_items_on_order_id ON line_items USING btree (order_id);
+
+
+--
+-- Name: index_line_items_on_product_id; Type: INDEX; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE INDEX index_line_items_on_product_id ON line_items USING btree (product_id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: alex; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: alex
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM alex;
+GRANT ALL ON SCHEMA public TO alex;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
