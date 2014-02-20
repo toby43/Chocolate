@@ -9,8 +9,8 @@ a:hover {
   color: #fff;
 }
 
-.cover-heading, h1 { 
-  color: #fff;
+.masthead-brand, h3 {
+  color: #333;
 }
 
 /* Custom default button */
