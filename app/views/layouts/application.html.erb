@@ -17,14 +17,13 @@
 <% if !params[:is_cover] %>
   <body>
     <div class ="container">
-    <div id="side">
-      <%if @cart %>
-        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
-          <%= render @cart %>
-        <% end %>
-      <% end %>
-
-      <ul>
+      <div class="row">
+        <ul class="nav nav-pills nav-stacked">
+          <%if @cart %>
+            <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+              <%= render @cart %>
+            <% end %>
+          <% end %>
         <li><a href=""><%= t('.home') %></a></li>
         <li><a href=""><%= t('.questions') %> </a></li>
         <li><a href=""><%= t('.news') %></a></li>
@@ -32,7 +31,7 @@
       </ul>
 
       <%if session[:user_id] %>
-        <ul>
+        <ul class="nav nav-pills nav-stacked">
           <li><%= link_to 'Orders', orders_path %></li>
           <li><%= link_to 'Products', products_path %></li>
           <li><%= link_to 'Users', users_path %></li>
@@ -40,9 +39,9 @@
         <%= button_to 'Logout', logout_path, method: :delete %>
       <% end %>
     </div>
+  </div>
 <% end %> 
       <%=yield %>
-  </div>
 </body>
 </html>
 
