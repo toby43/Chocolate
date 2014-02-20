@@ -2,8 +2,15 @@
 <html>
 <head>
   <title>Awesome Chocolate Store</title>
+<% if !params[:is_cover] %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+<% else %>
+<link href="assets/bootstrap.min.css" rel="stylesheet">
+<link href="assets/cover.css" rel="stylesheet">
+<script src ="assets/bootstrap.min.js"></script>
+<script src="assets/docs.min.js"></script>
+<% end %>
   <%= csrf_meta_tags %>
 </head>
 <% if !params[:is_cover] %>
@@ -43,10 +50,8 @@
         <%= button_to 'Logout', logout_path, method: :delete %>
       <% end %>
     </div>
-<% end %>
-    <div id="main">
+<% end %> 
       <%=yield %>
-    </div>
   </div>
 </body>
 </html>
