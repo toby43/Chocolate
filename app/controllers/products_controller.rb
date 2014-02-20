@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  skip_before_action :authorize, only: [:index]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_product
 
