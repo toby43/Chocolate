@@ -17,12 +17,12 @@ Store::Application.routes.draw do
 
   resources :products
 
-  scope '(:locale)' do
+#  scope '(:locale)' do
     resources :orders
     resources :line_items
     resources :carts
     root 'store#main', as: 'store', via: :all
-  end
+#  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
