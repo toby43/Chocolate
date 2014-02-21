@@ -4,6 +4,7 @@
   <title>Awesome Chocolate Store</title>
 <% if !params[:is_cover] %>
   <%= stylesheet_link_tag    "bootstrap.min", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "dashboard", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 <% else %>
 <script src="assets/jquery.min.js"></script>
@@ -16,9 +17,10 @@
 </head>
 <% if !params[:is_cover] %>
   <body>
-    <div class ="container">
-      <div class="row">
-        <ul class="nav nav-pills">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
           <li class="active">
           <%if @cart %>
             <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
@@ -30,10 +32,12 @@
         <li><a href=""><%= t('.news') %></a></li>
         <li><a href=""><%= t('.contact') %></a></li>
       </ul>
+     </div>
+    </div>
     </div>
 
+  <div class ="container-fluid">
     <div class="row">
-      <div class="col-sm-3 col-md-2 sidebar">
       <%#if session[:user_id] %>
         <!--ul class="nav nav-pills nav-stacked">
           <li><%= link_to 'Orders', orders_path %></li>
@@ -42,8 +46,7 @@
         </ul--!>
         <%#= button_to 'Logout', logout_path, method: :delete %>
         <%# end %>
-        <%= render @cart %>
-        </div>
+        <%= render partial: 'carts/cart', locals: { cart: @cart = Cart.new} %>
       <% end %> 
     <%=yield %>
   </div>
