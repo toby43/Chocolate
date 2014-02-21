@@ -5,3 +5,4 @@
 $(document).on "read page:change", ->
   $('.store .entry > img').click ->
     $(this).parent().find(':submit').click()
+
