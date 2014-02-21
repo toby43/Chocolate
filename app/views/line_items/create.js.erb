@@ -1,8 +1,8 @@
 $('#notice').hide();
 
-if ($('#cart tr').length == 1) { $('#cart').show('blind', 1000);}
+if ($('.col-sm-3.col-md-2.sidebar tr').length == 1) { $('.col-ms-2.col-md-2.sidebar').show('blind', 1000);}
 
-$('#cart').html("<%= escape_javascript render(@cart) %>");
+$('.col-sm-3.col-md-2.sidebar').html("<%= escape_javascript render(@cart) %>");
 
 $('#current_item').css({'background-color':'#c48189'}).
   animate({'background-color':'#7d0552'}, 1000);
