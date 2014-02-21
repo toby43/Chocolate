@@ -2,18 +2,18 @@
 
 <% @products.each do |product| %>
   <div class="media">
-         <a href="#" class="thumbnail pull-left"><%= image_tag product.image_url, :class=> "media-object", :width=>150, :height=>150 %></a>
-
-        <div class="media-body">
-          <div class="media-heading">
-           <h3><%=product.title%></h3>
+         <a href="#" class="thumbnail pull-left"><%= image_tag product.image_url, :class=> "media-object", :width=>64, :height=>64 %></a>
+        <div class="media-body pull-left">
+          <div class="row media-heading pull-left">
+             <h4><%=product.title%></h4>
           </div>
-
-         <p><%=sanitize(product.description)%></p>
+          <div class="row">
+         <%= truncate(strip_tags(product.description), length: 80) %>
          <div class ="price_line">
            <span class="price"><%= number_to_currency(product.price) %> </span>
-           <%= button_to t('.add_html'), line_items_path(product_id: product), remote: true %>
+           <%= button_to 'Add to Cart', line_items_path(product_id: product), remote: true %>
          </div>
+        <div>
       </div>
-</div>
+  </div>
 <%end %>

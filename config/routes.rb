@@ -15,6 +15,8 @@ Store::Application.routes.draw do
     get :who_bought, on: :member
   end
 
+  resources :products
+
   scope '(:locale)' do
     resources :orders
     resources :line_items
