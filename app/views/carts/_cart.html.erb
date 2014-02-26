@@ -4,8 +4,8 @@
   <%=render(cart.line_items) %>
 
   <tr class="total_line">
-    <td colspan="2">Total&nbsp </td>
-    <td class="total_cell"><%= number_to_currency(cart.total_price) %></td>
+    <td colspan="2"><small><strong>Total&nbsp&nbsp </td>
+        <td class="total_cell"><small><strong><%= number_to_currency(cart.total_price) %></small></strong></td>
   </tr>
 
 </table>
