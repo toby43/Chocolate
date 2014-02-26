@@ -3,8 +3,8 @@
 <% @products.each do |product| %>
   <div class="media">
          <a href="#" class="thumbnail pull-left"><%= image_tag product.image_url, :class=> "media-object", :width=>64, :height=>64 %></a>
-        <div class="media-body">
-         <div class="row media-heading"><h4><%=product.title%></h4></div>
+         <div class="media-body">
+         <div class="row media-heading"><h4><%= product.title%></h4></div>
          <%= truncate(strip_tags(product.description), length: 80) %>
          <div class ="price_line">
          <span class="price"><%= number_to_currency(product.price) %> </span>

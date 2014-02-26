@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+#    render 'index.js.erb'
   end
 
   # GET /products/1
