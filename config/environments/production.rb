@@ -59,10 +59,10 @@ Store::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += ["bootstrap.min.js"]
-  config.assets.precompile += ["boostrap.min.css"]
-  config.assets.precompile += ["docs.min.js"]
-  config.assets.precompile += ["store.js.coffee"]
+  config.assets.precompile += ["assets/bootstrap.min.js"]
+  config.assets.precompile += ["assets/boostrap.min.css"]
+  config.assets.precompile += ["assets/docs.min.js"]
+  config.assets.precompile += ["assets/store.js.coffee"]
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
