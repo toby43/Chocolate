@@ -46,6 +46,7 @@
         </ul--!>
         <%#= button_to 'Logout', logout_path, method: :delete %>
         <%# end %>
+        <%= render partial: 'carts/cart', locals: {cart: @cart= Cart.new} %>
       <% end %> 
     <%=yield %>
   </div>
