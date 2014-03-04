@@ -1,1 +1,5 @@
-Rails app for an online chocolate store.
+# Online Chocolate Store
+
+## Tech Stack
+Ruby v2.1, Rails 4
+CoffeeScript 
